@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+ 
+:root{
+  --pink:#ff7eb3;
+  --purple:#c445ff;
+  --glass:rgba(255,255,255,0.12);
+  --glass-border:rgba(255,255,255,0.25);
+}
+ 
+html{scroll-behavior:smooth;}
+ 
+body{
+  background:linear-gradient(135deg,#1a0033,#3d0066,#6a0080);
+  min-height:100vh;
+  overflow-x:hidden;
+  color:white;
+}
+ 
+#particles{
+  position:fixed;top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+.particle{
+  position:absolute;
+  background:rgba(255,255,255,0.4);
+  border-radius:50%;
+  animation:float linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:0.5;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+ 
+#pantallaEspera{
+  position:fixed;top:0;left:0;
+  width:100%;height:100vh;
+  background:linear-gradient(135deg,#0d001a,#2a0050);
+  display:flex;justify-content:center;align-items:center;
+  z-index:9999;
+  transition:opacity 1.8s ease;
+}
+.espera-box{
+  text-align:center;
+  padding:50px 40px;
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:30px;
+  max-width:520px;
+  width:90%;
+  animation:aparecer 1s ease;
+}
+@keyframes aparecer{
+  from{opacity:0;transform:scale(0.85) translateY(30px);}
+  to{opacity:1;transform:scale(1) translateY(0);}
+}
+.espera-box h1{
+  font-family:'Dancing Script',cursive;
+  font-size:3rem;
+  margin-bottom:10px;
+  background:linear-gradient(90deg,var(--pink),#fff,var(--purple));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.espera-box p{font-size:1rem;opacity:0.75;margin-bottom:30px;line-height:1.7;}
+ 
+.contador-espera{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-bottom:30px;
+}
+.tiempo-espera{
+  width:110px;height:110px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+}
+.tiempo-espera span{
+  font-size:2.2rem;font-weight:700;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.tiempo-espera small{font-size:0.75rem;opacity:0.6;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+ 
+#mensajeListo{
+  display:none;
+  font-family:'Dancing Script',cursive;
+  font-size:1.8rem;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,var(--pink),#fff,var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+#btnEntrar{
+  display:none;
+  padding:16px 45px;
+  border:none;border-radius:50px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:white;font-size:1.1rem;font-weight:600;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(196,69,255,0.5);
+  animation:pulso 1.5s ease-in-out infinite;
+  transition:transform 0.2s;
+}
+#btnEntrar:hover{transform:scale(1.08);}
+@keyframes pulso{
+  0%,100%{box-shadow:0 8px 25px rgba(196,69,255,0.4);}
+  50%{box-shadow:0 12px 40px rgba(196,69,255,0.8);}
+}
+ 
+#pantallaInicio{
+  position:fixed;top:0;left:0;
+  width:100%;height:100vh;
+  background:linear-gradient(135deg,#0d001a,#2a0050);
+  display:none;
+  justify-content:center;align-items:center;
+  z-index:9998;
+  transition:opacity 1.5s ease;
+}
+.regalo-box{
+  text-align:center;
+  padding:50px 40px;
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:30px;
+  max-width:500px;width:90%;
+  animation:aparecer 1s ease;
+}
+.regalo-box h1{
+  font-family:'Dancing Script',cursive;font-size:3rem;margin-bottom:15px;
+  background:linear-gradient(90deg,var(--pink),#fff,var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.regalo-box p{font-size:1.1rem;opacity:0.85;margin-bottom:30px;line-height:1.7;}
+.caja-regalo{
+  font-size:5rem;cursor:pointer;display:inline-block;
+  animation:pulso2 1.5s ease-in-out infinite;
+  margin-bottom:20px;transition:transform 0.2s;user-select:none;
+}
+.caja-regalo:hover{transform:scale(1.15) rotate(-5deg);}
+@keyframes pulso2{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.btn-abrir{
+  padding:16px 40px;border:none;border-radius:50px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:white;font-size:1.1rem;font-weight:600;cursor:pointer;
+  transition:all 0.3s;box-shadow:0 8px 25px rgba(196,69,255,0.4);
+}
+.btn-abrir:hover{transform:translateY(-3px) scale(1.05);}
+ 
+section{padding:90px 20px;position:relative;z-index:1;}
+.titulo{
+  text-align:center;font-size:2.2rem;margin-bottom:50px;
+  font-family:'Dancing Script',cursive;
+  background:linear-gradient(90deg,var(--pink),#fff,var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+ 
+.hero{
+  height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:20px;position:relative;z-index:1;
+}
+.hero h1{
+  font-family:'Dancing Script',cursive;font-size:4.5rem;line-height:1.2;
+  background:linear-gradient(90deg,var(--pink),#fff,var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:aparecer 1.2s ease;
+}
+.hero p{margin-top:20px;font-size:1.2rem;opacity:0.85;max-width:500px;line-height:1.7;}
+.hero-btns{margin-top:40px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+.btn{
+  padding:14px 30px;border:1.5px solid var(--glass-border);border-radius:50px;
+  background:var(--glass);backdrop-filter:blur(10px);color:white;
+  font-weight:600;cursor:pointer;transition:all 0.3s;font-size:1rem;
+}
+.btn:hover{background:rgba(255,255,255,0.22);transform:translateY(-3px) scale(1.05);}
+.btn-primary{
+  background:linear-gradient(135deg,var(--pink),var(--purple));border:none;
+  box-shadow:0 6px 20px rgba(196,69,255,0.4);
+}
+ 
+.galeria{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;max-width:1200px;margin:auto;
+}
+.galeria img{
+  width:100%;height:300px;object-fit:cover;border-radius:20px;
+  border:1.5px solid var(--glass-border);transition:all 0.4s;cursor:pointer;
+}
+.galeria img:hover{transform:scale(1.04) rotate(1deg);box-shadow:0 15px 40px rgba(196,69,255,0.4);border-color:var(--purple);}
+ 
+#lightbox{
+  display:none;position:fixed;top:0;left:0;
+  width:100%;height:100vh;background:rgba(0,0,0,0.88);
+  z-index:8000;justify-content:center;align-items:center;
+}
+#lightbox.activo{display:flex;}
+#lightboxImg{
+  max-width:88vw;max-height:85vh;border-radius:20px;
+  border:2px solid var(--glass-border);animation:aparecer 0.35s ease;
+}
+#lightboxCerrar{position:absolute;top:25px;right:30px;font-size:2.2rem;cursor:pointer;opacity:0.7;}
+#lightboxCerrar:hover{opacity:1;}
+ 
+.carta{
+  max-width:780px;margin:auto;background:var(--glass);
+  backdrop-filter:blur(15px);border:1px solid var(--glass-border);
+  border-radius:28px;padding:45px 40px;line-height:1.95;
+  font-size:1.05rem;text-align:center;position:relative;
+}
+.carta::before{
+  content:'"';font-family:'Dancing Script',cursive;font-size:8rem;
+  position:absolute;top:-15px;left:25px;opacity:0.12;line-height:1;pointer-events:none;
+}
+ 
+.frases{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:1000px;margin:auto;}
+.frase{
+  background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);
+  padding:22px 26px;border-radius:20px;width:220px;text-align:center;
+  font-size:0.95rem;line-height:1.6;transition:all 0.35s;
+}
+.frase:hover{transform:translateY(-6px) scale(1.03);border-color:var(--pink);}
+ 
+.razones{text-align:center;}
+.razon-card{
+  max-width:680px;margin:auto;padding:45px 40px;border-radius:28px;
+  background:var(--glass);backdrop-filter:blur(15px);border:1px solid var(--glass-border);
+}
+.razon-numero{font-size:0.85rem;letter-spacing:3px;text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+#textoRazon{font-family:'Dancing Script',cursive;font-size:1.6rem;line-height:1.7;margin-bottom:28px;min-height:60px;}
+.razon-barra{width:100%;height:4px;background:rgba(255,255,255,0.12);border-radius:4px;margin-bottom:28px;overflow:hidden;}
+.razon-progreso{height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));border-radius:4px;transition:width 0.5s ease;}
+ 
+.perdon{text-align:center;}
+.botones{margin-top:30px;position:relative;min-height:80px;}
+.si{
+  padding:16px 35px;border:none;border-radius:50px;
+  background:linear-gradient(135deg,#ff7eb3,var(--purple));
+  color:white;font-size:1.05rem;font-weight:600;cursor:pointer;
+  margin:10px;transition:all 0.3s;box-shadow:0 6px 20px rgba(196,69,255,0.4);
+}
+.si:hover{transform:scale(1.08);}
+.no{
+  padding:16px 30px;border:none;border-radius:50px;
+  background:rgba(255,77,109,0.3);border:1.5px solid rgba(255,77,109,0.5);
+  color:white;font-size:1rem;cursor:pointer;margin:10px;position:relative;
+}
+.resultado{
+  padding:30px;background:var(--glass);backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);border-radius:20px;
+  max-width:600px;margin:30px auto 0;font-size:1.1rem;line-height:1.7;display:none;
+}
+.resultado.visible{display:block;animation:aparecer 0.5s ease;}
+ 
+#musicaBtn{
+  position:fixed;bottom:25px;right:25px;width:55px;height:55px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--purple));border:none;color:white;
+  font-size:1.5rem;cursor:pointer;z-index:500;box-shadow:0 5px 20px rgba(196,69,255,0.5);
+  transition:all 0.3s;display:flex;align-items:center;justify-content:center;
+}
+#musicaBtn:hover{transform:scale(1.1);}
+ 
+.corazon{position:fixed;top:-30px;animation:caer linear forwards;z-index:200;pointer-events:none;}
+@keyframes caer{to{transform:translateY(110vh) rotate(360deg);}}
+.confeti{
+  position:fixed;top:-15px;z-index:300;pointer-events:none;border-radius:2px;
+  animation:caerConf linear forwards;
+}
+@keyframes caerConf{to{transform:translateY(110vh) rotate(900deg);opacity:0;}}
+ 
+footer{text-align:center;padding:40px 20px;opacity:0.6;font-size:0.9rem;border-top:1px solid var(--glass-border);position:relative;z-index:1;}
+.divisor{max-width:100px;height:2px;background:linear-gradient(90deg,transparent,var(--pink),var(--purple),transparent);margin:0 auto 40px;border-radius:2px;}
+audio{display:none;}
+
+/* =========================
+   RESPONSIVE CELULARES
+========================= */
+@media (max-width: 768px){
+
+  .hero h1{
+    font-size:2.8rem;
+  }
+
+  .hero p{
+    font-size:1rem;
+    padding:0 10px;
+  }
+
+  .titulo{
+    font-size:2rem;
+  }
+
+  .espera-box,
+  .regalo-box,
+  .carta,
+  .razon-card{
+    padding:25px 20px;
+    width:95%;
+  }
+
+  .espera-box h1,
+  .regalo-box h1{
+    font-size:2.2rem;
+  }
+
+  .contador-espera{
+    gap:10px;
+  }
+
+  .tiempo-espera{
+    width:75px;
+    height:75px;
+  }
+
+  .tiempo-espera span{
+    font-size:1.3rem;
+  }
+
+  .tiempo-espera small{
+    font-size:0.6rem;
+  }
+
+  .galeria{
+    grid-template-columns:1fr;
+  }
+
+  .galeria img{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+  } 
+
+  .frases{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .frase{
+    width:100%;
+    max-width:320px;
+  }
+
+  img{
+    max-width:100%;
+    display:block;
+  }
+
+  #textoRazon{
+    font-size:1.3rem;
+  }
+
+  .hero-btns{
+    flex-direction:column;
+    width:100%;
+    align-items:center;
+  }
+
+  .btn,
+  .btn-primary,
+  .si,
+  .no{
+    width:90%;
+    max-width:300px;
+  }
+
+  .caja-regalo{
+    font-size:4rem;
+  }
+
+  #musicaBtn{
+    width:50px;
+    height:50px;
+    font-size:1.2rem;
+    bottom:15px;
+    right:15px;
+  }
+
+  section{
+    padding:60px 15px;
+  }
+
+}
+
+@media (max-width: 480px){
+
+  .hero h1{
+    font-size:2.2rem;
+  }
+
+  .titulo{
+    font-size:1.7rem;
+  }
+
+  .espera-box h1,
+  .regalo-box h1{
+    font-size:1.8rem;
+  }
+
+  .carta{
+    font-size:0.95rem;
+    line-height:1.8;
+  }
+
+  .caja-regalo{
+    font-size:3.5rem;
+  }
+
+  .tiempo-espera{
+    width:65px;
+    height:65px;
+  }
+
+  .tiempo-espera span{
+    font-size:1.1rem;
+  }
+
+  #textoRazon{
+    font-size:1.15rem;
+  }
+
+}
+</style>
+</head>
+<body>
+ 
+<div id="particles"></div>
+ 
+<div id="pantallaEspera">
+  <div class="espera-box">
+    <p style="opacity:0.6;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Algo especial se acerca</p>
+    <h1>🎂 Para Magui ❤️</h1>
+    <p>Este regalo estará disponible cuando llegue tu día especial...</p>
+ 
+    <div class="contador-espera">
+      <div class="tiempo-espera"><span id="dias">00</span><small>Días</small></div>
+      <div class="tiempo-espera"><span id="horas">00</span><small>Horas</small></div>
+      <div class="tiempo-espera"><span id="minutos">00</span><small>Minutos</small></div>
+      <div class="tiempo-espera"><span id="segundos">00</span><small>Segundos</small></div>
+    </div>
+ 
+    <div id="mensajeListo">🎉 ¡Ya es tu día! ❤️</div>
+    <button id="btnEntrar" onclick="entrarAlRegalo()">🎁 Abrir mi regalo ✨</button>
+  </div>
+</div>
+ 
+<div id="pantallaInicio">
+  <div class="regalo-box">
+    <p style="opacity:0.65;font-size:0.9rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:15px;">Para ti</p>
+    <div class="caja-regalo" onclick="abrirRegalo()">🎁</div>
+    <h1>Hay algo especial esperándote</h1>
+    <p>Preparé esto con mucho cariño... toca para abrir tu regalo 💖</p>
+    <button class="btn-abrir" onclick="abrirRegalo()">Abrir regalo ✨</button>
+  </div>
+</div>
+ 
+<section class="hero">
+  <h1>🎂 Feliz Cumpleaños Magui ❤️</h1>
+  <p>Hoy quiero regalarte este pequeño detalle hecho con mucho cariño por mí.</p>
+  <div class="hero-btns">
+    <button class="btn btn-primary" onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})">Explorar ✨</button>
+  </div>
+</section>
+ 
+<section id="galeria">
+  <h2 class="titulo">📸 Tu hermosura es única</h2>
+  <div class="divisor"></div>
+  <div class="galeria">
+    <img src="img/foto1.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 1">
+    <img src="img/foto2.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 2">
+    <img src="img/foto3.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 3">
+    <img src="img/foto4.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 4">
+    <img src="img/foto5.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 5">
+    <img src="img/foto6.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 6">
+    <img src="img/foto7.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 6">
+    <img src="img/foto8.jpg" onclick="abrirLightbox(this.src)" alt="Recuerdo 6">
+  </div>
+</section>
+ 
+<div id="lightbox" onclick="cerrarLightbox()">
+  <span id="lightboxCerrar">✕</span>
+  <img id="lightboxImg" src="" alt="Foto ampliada">
+</div>
+ 
+<section>
+  <h2 class="titulo">💌 Carta para ti</h2>
+  <div class="divisor"></div>
+  <div class="carta">
+    <p>Hoy es tu día, y yo solo quiero que sepas cuánto significa tu presencia en mi vida.</p>
+    <br>
+    <p>Gracias por cada momento compartido, por cada sonrisa, por cada recuerdo que guardamos juntos. Eres de esas personas que hacen que el mundo sea un lugar más bonito simplemente con existir.</p>
+    <br>
+    <p>Espero que este cumpleaños esté lleno de amor, de alegría y de todo lo que mereces. Porque te lo mereces todo.</p>
+    <br>
+    <p>Pese a muchas cosas que pasaron, eso no ha cambiado que te siga queriendo, porque tu amistad ha sido una de las más importantes en mi vida.</p>
+    <br>
+    <p>Te esperare el tiempo que necesites, aunque las cosas esten muy complicadas entre ambas, espero volver a contar con tu amistad de aqui en adelante.</p>
+    <br>
+    <p style="font-family:'Dancing Script',cursive;font-size:1.6rem;background:linear-gradient(90deg,#ff7eb3,#fff,#c445ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Con todo mi cariño ❤️</p>
+  </div>
+</section>
+ 
+<section>
+  <h2 class="titulo">✨ Cosas que quiero decirte</h2>
+  <div class="divisor"></div>
+  <div class="frases">
+    <div class="frase">💖 Tu sonrisa ilumina cualquier lugar</div>
+    <div class="frase">🌹 Gracias por cada recuerdo</div>
+    <div class="frase">✨ Eres una persona increíble</div>
+    <div class="frase">🎂 Que todos tus sueños se cumplan</div>
+    <div class="frase">❤️ Gracias por existir</div>
+    <div class="frase">🌟 Mereces cosas hermosas</div>
+  </div>
+</section>
+ 
+<section class="razones">
+  <h2 class="titulo">💖 100 razones por las que eres especial</h2>
+  <div class="divisor"></div>
+  <div class="razon-card">
+    <div class="razon-numero" id="numeroRazon">— Presiona para comenzar —</div>
+    <div class="razon-barra"><div class="razon-progreso" id="razonProgreso" style="width:0%"></div></div>
+    <p id="textoRazon">Hay 100 razones esperándote ❤️</p>
+    <button class="btn btn-primary" onclick="mostrarRazon()">✨ Mostrar razón</button>
+  </div>
+</section>
+ 
+<section class="perdon">
+  <h2 class="titulo">💌 Antes de terminar...</h2>
+  <div class="divisor"></div>
+  <h3 style="font-size:1.5rem;margin-bottom:10px;">¿Me perdonas?</h3>
+  <p style="opacity:0.7;margin-bottom:10px;">Responde con el corazón 💖</p>
+  <div class="botones">
+    <button class="si" onclick="perdono()">Sí, te perdono ❤️</button>
+    <button class="no" id="btnNo">Necesito pensarlo 🤔</button>
+  </div>
+  <div class="resultado" id="resultado">
+    <h2 style="font-family:'Dancing Script',cursive;font-size:2rem;margin-bottom:12px;">🎉 ¡Gracias! ❤️</h2>
+    <p>Prometo seguir esforzándome, porque eres una persona muy especial para mí. 🥹💖</p>
+  </div>
+</section>
+ 
+<footer>Hecho con mucho cariño ❤️ — Solo para ti</footer>
+ 
+<button id="musicaBtn" onclick="toggleMusic()" title="Música">🎵</button>
+ 
+<audio id="musica" loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+ 
+<script>
+
+const pContainer = document.getElementById('particles');
+for(let i=0;i<40;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationDuration=(Math.random()*15+8)+'s';
+  p.style.animationDelay=(Math.random()*10)+'s';
+  p.style.width=p.style.height=(Math.random()*3+1)+'px';
+  p.style.opacity=Math.random()*0.5+0.1;
+  pContainer.appendChild(p);
+}
+ 
+const fechaCumple = new Date('Jun 04, 2026 00:14:15').getTime();
+ 
+const ticker = setInterval(()=>{
+  const ahora = new Date().getTime();
+  const dist = fechaCumple - ahora;
+ 
+  if(dist <= 0){
+    clearInterval(ticker);
+    document.querySelector('.contador-espera').style.display = 'none';
+    document.querySelector('.espera-box p').style.display = 'none';
+    document.getElementById('mensajeListo').style.display = 'block';
+    document.getElementById('btnEntrar').style.display = 'inline-block';
+    lanzarConfeti();
+    return;
+  }
+ 
+  document.getElementById('dias').innerHTML    = String(Math.floor(dist/(1000*60*60*24))).padStart(2,'0');
+  document.getElementById('horas').innerHTML   = String(Math.floor((dist%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
+  document.getElementById('minutos').innerHTML = String(Math.floor((dist%(1000*60*60))/(1000*60))).padStart(2,'0');
+  document.getElementById('segundos').innerHTML= String(Math.floor((dist%(1000*60))/1000)).padStart(2,'0');
+}, 1000);
+ 
+function entrarAlRegalo(){
+  const espera = document.getElementById('pantallaEspera');
+  espera.style.opacity = '0';
+  setTimeout(()=>{ espera.style.display='none'; }, 1800);
+ 
+  const regalo = document.getElementById('pantallaInicio');
+  regalo.style.display = 'flex';
+  setTimeout(()=>{ regalo.style.opacity='1'; }, 50);
+}
+ 
+function abrirRegalo(){
+  const audio = document.getElementById('musica');
+  audio.play().catch(()=>{});
+  lanzarConfeti();
+  const pantalla = document.getElementById('pantallaInicio');
+  pantalla.style.transition = '1.5s';
+  pantalla.style.opacity = '0';
+  setTimeout(()=>{ pantalla.remove(); }, 1500);
+}
+ 
+const audio = document.getElementById('musica');
+function toggleMusic(){
+  if(audio.paused){
+    audio.play().catch(()=>{});
+    document.getElementById('musicaBtn').innerHTML='⏸';
+  } else {
+    audio.pause();
+    document.getElementById('musicaBtn').innerHTML='🎵';
+  }
+}
+ 
+function crearCorazon(){
+  const c=document.createElement('div');
+  c.innerHTML=['❤️','💖','💗','💕','💝'][Math.floor(Math.random()*5)];
+  c.className='corazon';
+  c.style.left=Math.random()*100+'vw';
+  c.style.fontSize=(Math.random()*16+12)+'px';
+  c.style.animationDuration=(Math.random()*5+5)+'s';
+  c.style.opacity=Math.random()*0.5+0.3;
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),10000);
+}
+setInterval(crearCorazon,500);
+ 
+function crearMuchosCorazones(){
+  for(let i=0;i<80;i++){
+    setTimeout(()=>{
+      const c=document.createElement('div');
+      c.innerHTML=['❤️','💖','💗','💕','💝'][Math.floor(Math.random()*5)];
+      c.className='corazon';
+      c.style.left=Math.random()*100+'vw';
+      c.style.fontSize=(Math.random()*28+18)+'px';
+      c.style.animationDuration=(Math.random()*3+2)+'s';
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),5000);
+    },i*30);
+  }
+}
+ 
+function abrirLightbox(src){
+  document.getElementById('lightboxImg').src=src;
+  document.getElementById('lightbox').classList.add('activo');
+}
+function cerrarLightbox(){ document.getElementById('lightbox').classList.remove('activo'); }
+ 
+function lanzarConfeti(){
+  const col=['#ff4d6d','#ffd60a','#4cc9f0','#ffffff','#c445ff','#06d6a0','#ff7eb3'];
+  for(let i=0;i<180;i++){
+    setTimeout(()=>{
+      const c=document.createElement('div');
+      c.className='confeti';
+      c.style.left=Math.random()*100+'vw';
+      c.style.background=col[Math.floor(Math.random()*col.length)];
+      c.style.animationDuration=(Math.random()*3+2)+'s';
+      c.style.animationDelay=(Math.random()*0.5)+'s';
+      c.style.opacity=Math.random()*0.7+0.3;
+      c.style.borderRadius=Math.random()>0.5?'50%':'2px';
+      c.style.width=c.style.height=(Math.random()*8+5)+'px';
+      c.style.transform=`rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),5000);
+    },i*18);
+  }
+}
+ 
+function perdono(){
+  audio.play().catch(()=>{});
+  lanzarConfeti();
+  crearMuchosCorazones();
+  const r=document.getElementById('resultado');
+  r.classList.add('visible');
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+ 
+const btnNo=document.getElementById('btnNo');
+btnNo.addEventListener('mouseover',()=>{
+  const maxX=window.innerWidth-btnNo.offsetWidth-20;
+  const maxY=window.innerHeight*0.6;
+  btnNo.style.position='fixed';
+  btnNo.style.left=Math.random()*maxX+'px';
+  btnNo.style.top=Math.random()*maxY+100+'px';
+  btnNo.style.zIndex='100';
+});
+ 
+const razones=[
+"Tu sonrisa ilumina cualquier lugar.","Tu forma de ver la vida.","Tu manera de ayudar a los demás.",
+"Tu inteligencia.","Tu paciencia.","Tu sinceridad.","Tu noble corazón.","Tu sentido del humor.",
+"Tu forma de escuchar.","Tu fuerza para seguir adelante.","Tu forma de alegrar los días.",
+"Tu personalidad única.","Tu manera de preocuparte por otros.","Tu creatividad.","Tu amabilidad.",
+"Tu mirada.","Tu energía.","Tu autenticidad.","Tu valentía.","Tu forma de soñar.",
+"Tu ternura.","Tu capacidad de aprender.","Tu perseverancia.","Tu optimismo.",
+"Tu manera de inspirar.","Tu forma de hablar.","Tu sonrisa cuando estás feliz.",
+"Tu compañía.","Tu sensibilidad.","Tu confianza.","Tu forma de enfrentar problemas.",
+"Tu alegría.","Tu entusiasmo.","Tu forma de hacer sentir bien a los demás.",
+"Tu apoyo.","Tu comprensión.","Tu generosidad.","Tu empatía.","Tu espontaneidad.",
+"Tu sencillez.","Tu forma de celebrar los pequeños momentos.","Tu honestidad.",
+"Tu dedicación.","Tu esfuerzo diario.","Tu capacidad de sorprender.",
+"Tu forma de cuidar a quienes quieres.","Tu paciencia en momentos difíciles.",
+"Tu perseverancia cuando algo importa.","Tu forma de expresar cariño.","Tu gran corazón.",
+"Porque eres única.","Porque eres especial.","Porque haces sonreír a otros.",
+"Porque transmites tranquilidad.","Porque inspiras confianza.","Porque haces mejores los días.",
+"Porque tienes metas y sueños.","Porque siempre intentas mejorar.","Porque eres auténtica.",
+"Porque nunca dejas de aprender.","Porque tu presencia importa.","Porque tu felicidad contagia.",
+"Porque sabes escuchar.","Porque eres fuerte.","Porque eres valiente.","Porque eres amable.",
+"Porque eres inteligente.","Porque eres divertida.","Porque eres increíble.","Porque eres tú.",
+"Porque haces la diferencia.","Porque eres una gran persona.","Porque tienes buenos sentimientos.",
+"Porque tienes una sonrisa hermosa.","Porque sabes valorar los momentos.",
+"Porque te esfuerzas por lo que quieres.","Porque tienes una forma especial de ver el mundo.",
+"Porque sabes disfrutar la vida.","Porque haces sentir bien a quienes te rodean.",
+"Porque siempre hay algo bueno en ti.","Porque eres luz para muchas personas.",
+"Porque tu forma de ser es especial.","Porque tienes un corazón enorme.",
+"Porque haces únicos los momentos.","Porque sabes levantarte después de caer.",
+"Porque nunca te rindes fácilmente.","Porque tienes una esencia única.",
+"Porque inspiras admiración.","Porque mereces cosas bonitas.",
+"Porque haces del mundo un lugar mejor.","Porque cada día contigo es diferente.",
+"Porque tu sonrisa vale oro.","Porque tu felicidad importa.","Porque tienes sueños hermosos.",
+"Porque tienes una personalidad increíble.","Porque haces especiales los recuerdos.",
+"Porque siempre dejas una huella positiva.","Porque eres inolvidable.",
+"Porque eres extraordinaria.","Porque simplemente eres tú ❤️"
+];
+let usadas=[];
+function mostrarRazon(){
+  if(usadas.length===razones.length) usadas=[];
+  let idx;
+  do{ idx=Math.floor(Math.random()*razones.length); }while(usadas.includes(idx));
+  usadas.push(idx);
+  document.getElementById('numeroRazon').innerHTML=`Razón #${usadas.length} de 100`;
+  document.getElementById('textoRazon').innerHTML=razones[idx];
+  document.getElementById('razonProgreso').style.width=(usadas.length/razones.length*100)+'%';
+}
+ 
+document.addEventListener('click',()=>{
+  if(audio.paused) audio.play().catch(()=>{});
+},{once:true});
+</script>
+</body>
+</html>
